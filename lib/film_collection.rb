@@ -6,7 +6,7 @@ module FilmCollection
     films = []
     doc = Nokogiri::HTML(URI.open(IMDB_URL))
 
-    doc.css('.titleColumn').first(5).each do |film|
+    doc.css('.titleColumn').each do |film|
       title = film.css('a').text
       director = film.css('a').first.attributes["title"].value.split(' (').delete_at(0)
       year = film.css('.secondaryInfo').text

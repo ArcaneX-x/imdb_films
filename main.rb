@@ -5,7 +5,7 @@ require_relative 'lib/film'
 require_relative 'lib/film_collection'
 
 films = FilmCollection.from_imdb
-puts "Let's choose a movie"
+puts "Let's choose a movie:\n"
 
 directors = FilmCollection.directors(films)
 
