@@ -4,8 +4,8 @@ require 'open-uri'
 require_relative 'lib/film'
 require_relative 'lib/film_collection'
 
-films = FilmCollection.from_kinopoisk
-puts "Программа 'Фильм на вечер'"
+films = FilmCollection.from_imdb
+puts "Let's choose a movie"
 
 directors = FilmCollection.directors(films)
 
@@ -14,16 +14,16 @@ directors.each_with_index do |director, index|
 end
 
 puts
-puts 'Фильм какого режиссера вы хотите сегодня посмотреть?'
+puts 'Which film director do you want to see today? '
 
 user_input = 0
 
 until user_input.between?(1, directors.size)
-  puts "Введите число от 1 до #{directors.size}"
+  puts "Choose a number from 1 to #{directors.size}"
   user_input = STDIN.gets.to_i
 end
 
 puts
-puts 'И сегодня вечером рекомендую посмотреть:'
+puts 'And today we recommend to watch:'
 
 puts films.select { |film| film.director == directors[user_input.to_i - 1] }.sample

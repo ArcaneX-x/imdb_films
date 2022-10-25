@@ -2,17 +2,14 @@ module FilmCollection
   IMDB_URL = 'https://www.imdb.com/chart/top/?sort=us,desc&mode=simple&page=1'
 
   def self.from_imdb
-    html_page = KINOPOISK_URL.gsub('[', '%5B').gsub(']', '%5D')
 
     films = []
-    doc = Nokogiri::HTML(URI.open(html_page))
+    doc = Nokogiri::HTML(URI.open(IMDB_URL))
 
-    doc.css('div .item').each do |film|
-      title = film.css('.info .name a').text
-      director = film.css('.info .gray_text i .lined').text
-      year = film.css('.info .name span').text.split(' ').find { |string| string.match('\([0-9]{4}\)') }
-      year.delete!('()') unless year.nil?
-
+    doc.css('.titleColumn').first(5).each do |film|
+      title = film.css('a').text
+      director = film.css('a').first.attributes["title"].value.split(' (').delete_at(0)
+      year = film.css('.secondaryInfo').text
       unless title.empty? && director.empty? && year.nil?
         films << Film.new(title, director, year)
       end
