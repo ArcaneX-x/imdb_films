@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Film
   attr_reader :title, :director, :year
 

@@ -1,5 +1,4 @@
-require 'nokogiri'
-require 'open-uri'
+# frozen_string_literal: true
 
 require_relative 'lib/film'
 require_relative 'lib/film_collection'
@@ -20,7 +19,7 @@ user_input = 0
 
 until user_input.between?(1, directors.size)
   puts "Choose a number from 1 to #{directors.size}"
-  user_input = STDIN.gets.to_i
+  user_input = $stdin.gets.to_i
 end
 
 puts
